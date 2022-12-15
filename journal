@@ -1,0 +1,15 @@
+Dec 15 2022:
+- Started to build a Django app for the student management system
+- started with mattlaymon.com and finally moved to w3schools django tutorial
+- Before this I started an account with github for my webtri account
+	- I also set up the ssh keys with ssh-keygen tool
+	- Then the key was added to the config file in the ssh secret directory so as to enable usuage of different keys for different repos from the same machine
+
+- I created a seperate directory for my project named "StudnetManagementSystem"
+- A virtual environment was created with the command python -m venv myproject
+- This was activaed using the command source /bin/activate
+- Once inside the virtual environment, Django was installed with the command "pip install Django". This installed the latest version of Django.
+- The command "Deactivate" shall be used to come out of the virtual environment
+- Now inside the "StudentManagementSystem" Directory, i ran the command "django startproject sms". This created a directory "sms" with a file named "mange.py" and a directory "sms"
+- To check if my project worked, I went into the "sms" directory and ran "python manage.py runserver". This created a server at 127.0.0.1:8000. I visited this page and saw that Django was running 
+
