@@ -1,0 +1,18 @@
+What is expected out of the project?
+1. A webpage where a student can login and see all his internal marks for a department, his average and his attendances for the different class types
+2. A webpage where a faculy can login and see details of all the students
+3. The data should be secure
+
+
+Implementation
+1. In Django, First it will be developed locally and then hosted on a VPS
+2. It should be done as a docker container.
+
+To do:
+1. To open a fresh github account for "webtri"
+	- opened a fresh github account 
+2. Should read on how to create a docker file
+3. The entire process should be documented in my blog.
+
+
+
