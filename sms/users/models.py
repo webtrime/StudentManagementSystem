@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Users(models.Model):
+    roll_no = models.CharField(max_length=4)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
     gender = models.CharField(max_length=6)

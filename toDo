@@ -17,3 +17,13 @@ To do:
 
 
 
+Dec 21 2022:
+Design:
+A student on admission should have his name and roll no be entered into the database
+This student should be given a username and password.
+He while logging in should be able to update his profile as and when wanted.
+- to create a page to store the data from student_reg page to database 
+- to create a page to update the student data
+
+
+
