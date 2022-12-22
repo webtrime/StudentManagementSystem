@@ -24,6 +24,7 @@ def student_reg(request):
         form = StudentForm()
     return render(request,'student_reg_form.html',{'form':form})
 
+
 def add_user(request):
     roll_no = request.POST['roll_no']
     first_name = request.POST['first_name']    
@@ -81,4 +82,15 @@ def add_user(request):
     ) 
     user.save()
     return HttpResponseRedirect(reverse("student_reg"))
+
+def update_user(request,id):
+    user = Users.objects.get(id=id)
+    template = loader.get_template('update_student.html')
+    context = {
+        'user' : user,
+    }
+    return HttpResponse(template.render(context,request))
+
+def dashboard(request):
+    return render(request, "users/dashboard.html")
     
