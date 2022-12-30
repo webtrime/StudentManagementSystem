@@ -2,8 +2,9 @@
 from django import forms
 
 class StudentForm(forms.Form):
+    unique_id = forms.CharField(label="UniqueId",max_length=50)
     roll_no = forms.CharField(label='RollNo',max_length=4)
-    first_name = forms.CharField(label='Firstname',max_length=100)
+    firstname = forms.CharField(label='Firstname',max_length=100)
     lastname = forms.CharField(label='Lastname',max_length=255)
     gender = forms.CharField(label='gender',max_length=6)
     email = forms.CharField(label='email',max_length=255)
@@ -28,3 +29,15 @@ class StudentForm(forms.Form):
     permanent_address = forms.CharField(label='permanent_address',max_length=1024)
     pincode = forms.CharField(label='pincode',max_length=255)
     parents_email = forms.CharField(label='parents_email',max_length=255)
+
+class PracticalInternal(forms.Form):
+    test_id = forms.CharField(label='test_id',max_length=100)
+    max_marks = forms.CharField(label="max_marks",max_length=100)
+    date_of_conduction = forms.DateField()
+
+class AddPracticalMarks(forms.Form):
+    unique_id = forms.CharField(label="unique_id",max_length=50)
+    unique_test_id = forms.CharField(label="unique_test_id",max_length=50)
+    marks = forms.CharField(label="mark_obtained",max_length=100)
+    
+

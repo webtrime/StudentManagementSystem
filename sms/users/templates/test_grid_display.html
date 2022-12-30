@@ -1,0 +1,23 @@
+<h1>test grid page</h1>
+
+<table border = '2'>
+<tr>
+    <th>Student_id</th>
+    <th>Student_Name</th>
+    {% for i in practical_test_data %}
+        <th>{{ i.test_id }}</th>
+    {% endfor %}
+</tr>
+
+{% for key,value in students.items %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ value.name }}</td>
+        {% for key1,value1 in value.marks.items %}
+        <td>{{value1.1}}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+
+</table>
+

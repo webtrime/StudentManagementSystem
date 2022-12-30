@@ -1,0 +1,9 @@
+<!--form action = '/users/add_student/' method="post"-->
+<form action = '/users/add_/' method='post'>
+	{% csrf_token %}
+	<table>
+	{{ form.as_table}}
+	</table>
+	<h1>test1</h1>
+	<input type="submit" value="Submit">
+</form>

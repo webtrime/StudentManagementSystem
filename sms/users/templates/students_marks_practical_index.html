@@ -1,0 +1,25 @@
+<h1>Practical Marks</h1>
+<table boder='2'>
+    <tr>
+        <th>Student_unique_id</th>
+        <th>Marks_last_obtained</th>
+    </tr>
+
+	{% for x in student %}
+    <tr>
+        <td>{{x.unique_id}}</td>
+        <td>{{x.student.last.marks}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+This displays all the data from the PracticalInternalStudent Table
+<table border ='2'>
+        {% for y in marks %}
+        <tr>
+            <td>{{y.marks}}</td>
+        </tr>
+        {% endfor %}
+</table>
+

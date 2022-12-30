@@ -1,0 +1,63 @@
+<h1>Students</h1>
+<table border='2'>
+    <tr>
+        <th>S.No</th>
+        <th>Student_id</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Date of birth</th>
+        <th>Mobile No</th>
+		<th>Hosteler</th>
+		<th>mother_tongue</th>
+		<th>other_languages</th>
+		<th>nationality</th>
+		<th>community</th>
+		<th>blood_group</th>
+		<th>educational_qualification</th>
+		<th>name_of_school_last_studied</th>
+		<th>neet_marks</th>
+		<th>extracurricular_activities</th>
+		<th>fathers_name</th>
+		<th>fathers_occupation</th>
+		<th>fathers_mobile</th>
+		<th>mothers_name</th>
+		<th>mothers_occupation</th>
+		<th>permanent_address</th>
+		<th>pincode</th>
+		<th>parents_email</th>
+
+    </tr>
+	{% for x in students %}
+	<tr>
+        <td>{{x.id}}</td>
+        <td><a href = "/users/update_student/{{x.unique_id}}"> {{x.unique_id}}</a></td>
+		<td>{{x.firstname}}</td>
+		<td>{{x.lastname}}</td>
+		<td>{{x.gender}}</td>
+		<td>{{x.email}}</td>
+		<td>{{x.date_of_birth}}</td>
+		<td>{{x.mobile_no}}</td>
+		<td>{{x.hosteler}}</td>
+		<td>{{x.mother_tongue}}</td>
+		<td>{{x.other_languages}}</td>
+		<td>{{x.nationality}}</td>
+		<td>{{x.community}}</td>
+		<td>{{x.blood_group}}</td>
+		<td>{{x.educational_qualification}}</td>
+		<td>{{x.name_of_school_last_studied}}</td>
+		<td>{{x.neet_marks}}</td>
+		<td>{{x.extracurricular_activities}}</td>
+		<td>{{x.fathers_name}}</td>
+		<td>{{x.fathers_occupation}}</td>
+		<td>{{x.fathers_mobile}}</td>
+		<td>{{x.mothers_name}}</td>
+		<td>{{x.mothers_occupation}}</td>
+		<td>{{x.permanent_address}}</td>
+		<td>{{x.pincode}}</td>
+		<td>{{x.parents_email}}</td>
+	</tr>
+	{% endfor %}
+</table>
+

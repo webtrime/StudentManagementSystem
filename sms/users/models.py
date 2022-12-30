@@ -1,8 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Users(models.Model):
-    roll_no = models.CharField(max_length=4)
+
+class Student(models.Model):
+    unique_id = models.CharField(max_length = 100,unique = True)
+    roll_no = models.CharField(max_length = 4, unique = True)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
     gender = models.CharField(max_length=6)
@@ -28,6 +30,27 @@ class Users(models.Model):
     permanent_address = models.CharField(max_length=1024)
     pincode = models.CharField(max_length=255)
     parents_email = models.CharField(max_length=255)
+
+class PracticalInt(models.Model):
+    '''
+    test_id = 20221111, date in the reverse will be test id
+    max_marks = 20 , max_marks for the test
+    date_of_conduction = 2022-11-11, date on which the date is conducted
+    '''
+    test_id = models.CharField(max_length = 50, unique = True)
+    max_marks = models.IntegerField()
+    date_of_conduction = models.DateField()
+
+class PracticalInternalStudent(models.Model):
+    s = models.ForeignKey(Student,on_delete=models.CASCADE,related_name = "student")
+    unique_test = models.ForeignKey(PracticalInt,on_delete=models.CASCADE,related_name = "practical_test")
+    marks = models.IntegerField()
+
+
+
+    
+
+
 
 
 

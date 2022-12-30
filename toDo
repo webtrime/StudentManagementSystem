@@ -26,4 +26,101 @@ He while logging in should be able to update his profile as and when wanted.
 - to create a page to update the student data
 
 
+Dec 27 2022:
+Design:
+There are supposed to be 3 types of users namely students, faculty and admin
+Permissions required for each of these types are
+
+Type of database to design:
+As of now I have decided to have a single database with the following tables
+1. A student biodata table
+	- 1 row for each student
+	- a unique student id apart from roll no shall be unique and that shall be the one which is used to reference or collect data from other tables
+	- columns for describing the biodata of the student
+
+	The data from this table must be able to be seen by a student after successfull login. Only that student and the staff should be able to see after successfull login.
+	The student should be able to see it under a url like
+	home/student-id/profile
+
+	A student should be able to see his profile and details under his session not others.
+	Even if others are logged in, others must not be able to see his profile.
+
+	- should read on how django handles sessions.
+
+
+2. A practical internal student  table
+	- The columns are going to be the following
+		- the unique id for a student
+		- roll no of the student
+		- name of the student
+		- A unique test id like date of conduction in reverse eg. 221102_prac, this shall be used to reference another table which is going to contain the max marks of the test and other attributes of the test 
+		- marks obtained by the student
+	- A single row will contain a student's attributes, so for a single test, there will be 150 rows for all students
+
+Steps:
+1. create a model for practical internal student with the necessary columns
+2. fill it up with dummy data
+
+3. A practical internal table
+	- The columns of are going to be
+		- The unique test id
+		- max marks
+		- date of conduction of test
+
+4. A theory internal student table
+	- The columns are going to be the following
+		- the unique id for a student
+		- roll no of the student
+		- name of the student
+		- A unique test id like date of conduction in reverse eg. 221102_prac, this shall be used to reference another table which is going to contain the max marks of the test and other attributes of the test 
+		- marks obtained by the student
+	- A single row will contain a student's attributes, so for a single test, there will be 150 rows for all students
+
+
+5. A theory internal table
+	- The columns of are going to be
+		- The unique test id
+		- max marks
+		- date of conduction of test
+	- Each row will describe a test
+
+6. A student attendance table
+
+	- The columns are going to be
+		- unique student id
+		- roll no
+		- name of the student
+		- type of class (eg, theory, practical, sdl, ECE, AETCOM)
+		- presence (zero for absent or the number of hours of class for present)
+
+	- On a single day, there will be multiples of students rows. Eg if there are 150 students, then if there were 3 types of class conducted on Monday, there shall be 3 * 150 rows on a single day.
+
+
+
+
+Students
+- They should not be able to modify the following in the profile
+	- Roll No
+	- First Name 
+	- Last Name
+	- Photo
+- They should be able to update their profile,
+	- Profile includes their email id, phone number, etc 
+- They should be able to view ONLY their attendance percentages and internal marks
+
+
+Faculty:
+- They should be able to view marks and attendances of all students in a single scrollable page
+
+Admin:
+- He should be able to do any thing on the app
+https://realpython.com/django-user-management/
+is a good tutorial
+
+A student on admission should have his name and roll no be entered into the database
+This student should be given a username and password.
+
+- to create a page where the user will be able to update his data. While trying to update the user should must see their previously entered data in the form fields..
+- to find a workaround to so that student_reg form can be submitted without some form fields filled out..
+
 
