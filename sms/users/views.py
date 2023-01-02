@@ -7,7 +7,7 @@ from .models import PracticalInternalStudent
 from .models import PracticalInt
 from .forms import StudentForm 
 from .forms import AddPracticalMarks
-from .forms import PracticalInternal 
+from .forms import PracticalInternalForm 
 
 def test_index(request):
     my_users = Users.objects.all().values()
@@ -157,6 +157,10 @@ def test1_student_practical_index(request):
 # Create your views here.
 
 def student_reg(request):
+    '''
+    Usage : to render a form where a student detail can be entered
+    '''
+
     if request.method == 'POST':
         form = StudentForm(request.POST) 
         print("I am inside if post is true ")
@@ -170,79 +174,126 @@ def student_reg(request):
     return render(request,'stu_reg_form.html',{'form':form})
 
 def add_student(request):
-    unique_id = request.POST['unique_id']
-    roll_no = request.POST['roll_no']
-    firstname = request.POST['firstname']    
-    lastname = request.POST['lastname']
-    gender = request.POST['gender']
-    email = request.POST['email']
-    #photo need to create a field for photo upload
-    date_of_birth = request.POST['date_of_birth']
-    mobile_no = request.POST['mobile_no']
-    hosteler = request.POST['hosteler']
-    mother_tongue = request.POST['mother_tongue']
-    other_languages = request.POST['other_languages']
-    nationality = request.POST['nationality']
-    community = request.POST['community']
-    blood_group = request.POST['blood_group']
-    educational_qualification = request.POST['educational_qualification']
-    name_of_school_last_studied = request.POST['name_of_school_last_studied']
-    neet_marks = request.POST['neet_marks']
-    extracurricular_activities = request.POST['extracurricular_activities']
-    fathers_name = request.POST['fathers_name']
-    fathers_occupation = request.POST['fathers_occupation']
-    fathers_mobile = request.POST['fathers_mobile']
-    mothers_name = request.POST['mothers_name']
-    mothers_occupation = request.POST['mothers_occupation']
-    permanent_address = request.POST['permanent_address']
-    pincode = request.POST['pincode']
-    parents_email = request.POST['parents_email']
-    student = Student(
-        unique_id = unique_id,
-        roll_no = roll_no,
-        firstname = firstname,    
-        lastname = lastname,
-        gender = gender,
-        email = email,
-        #photo need to create a field for photo upload
-        date_of_birth = date_of_birth,
-        mobile_no = mobile_no,
-        hosteler = hosteler,
-        mother_tongue = mother_tongue,
-        other_languages = other_languages,
-        nationality = nationality,
-        community = community,
-        blood_group = blood_group,
-        educational_qualification = educational_qualification,
-        name_of_school_last_studied = name_of_school_last_studied,
-        neet_marks = neet_marks,
-        extracurricular_activities = extracurricular_activities,
-        fathers_name = fathers_name,
-        fathers_occupation = fathers_occupation,
-        fathers_mobile = fathers_mobile,
-        mothers_name = mothers_name,
-        mothers_occupation = mothers_occupation,
-        permanent_address = permanent_address,
-        pincode = pincode,
-        parents_email = parents_email
-    ) 
+    '''
+    Usage: To save the student details to a form
+    '''
+    # copy the incoming post data
+    student_data = request.POST.copy()
+    # pop the 'csrfmiddlewaretoken'
+    student_data.pop('csrfmiddlewaretoken')
+    # convert it to a dictionary to create a Model object
+    student_data_dict = student_data.dict()
+    print(student_data_dict)
+    
+    # ** are required to unpack the dictionary
+
+    student = Student(**student_data_dict)
+
     print("saving to student database")
     student.save()
     print("saving to student database")
     return HttpResponseRedirect(reverse("student_reg"))
 
-def update_student(request,student_id):
-    student = Student.objects.filter(unique_id = student_id).values()[0]
-    print(student)
-    template = loader.get_template('update_student.html') 
 
-    form = StudentForm(initial = student) 
+def update_student_new(request,student_id):
+    '''
+    Usage: To update a student detail
+    '''
+    student = Student.objects.get(unique_id = student_id)
 
+    if (request.method == 'POST'):
+
+        form = StudentForm(request.POST, instance = student)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('student_grid'))
+        
+        # update the record and goto users page again
+        #print(request.POST)
+        #post_data = request.POST.copy()
+        #post_data.pop('csrfmiddlewaretoken')
+        #updated_student_values = post_data.dict()  
+        #print(updated_student_values)
+        #print("updated_student_values")
+        #print(type(updated_student_values))
+
+        # remove the csrfmiddlewaretoken field from the dictionary
+        # print(updated_student_values)
+        #print(type(updated_student_values))
+
+        # student = Student(**updated_student_values)
+        # student.save(force_update = True)
+
+        # return HttpResponseRedirect(reverse('index')) 
+
+    elif (request.method == 'GET'):
+
+        form = StudentForm(instance = student)
+
+        template = loader.get_template('update_student.html') 
+        context = {}
+        context['form'] = form
+        context['student'] = student
+        # if view is called by a get method then call with values from database
+
+        return HttpResponse(template.render(context,request))
+
+def delete_student(request,student_id):
+    '''
+    Usage: To delete a student from the table
+    '''
+    student = Student.objects.get(unique_id = student_id)
+    student.delete()
+    return HttpResponseRedirect(reverse('student_grid'))
+
+def enter_prac_marks(request):
+    '''
+    Usage : To render a 2 form from where test details and marks of all
+    students can be entered 
+    This view will be called to render the entry form for a single practical
+    test
+
+    # call the Student table and get the students
+    # practical test details form from forms.py
+
+    '''
+    practical_test_details_form = PracticalInternalForm() 
+    students = Student.objects.all().order_by('unique_id')
+    #print('show student')
+    #print(students)
     context = {
-        'form' : form,
+        'students': students,
+        'test_details_form' : practical_test_details_form,
     }
-    print(type(student))
+
+    template = loader.get_template('practical_marks_entry_all.html')
     return HttpResponse(template.render(context,request))
+
+
+
+    # call the 
+
+    pass
+
+def save_prac_marks(request):
+    '''
+    This view will be called to save the practical marks
+
+    # the post data contains data for 2 models 1 for PracticalInt and another
+    # for PracticalInternalStudent 
+    # since data is supposed to go to 2 tables, need to decide on how the post
+    # data is going to come, 
+    #   - Should I use javascript on the front end to convert it to a json file
+    #   and send 
+    #   - Or should I use dynamically generated form field ids and process it
+    #   here
+
+
+    '''
+
+    pass
+
 
 def update_user(request,id):
     user = Users.objects.get(id=id)
@@ -357,14 +408,14 @@ def add_student_mark_practical(request):
 
 def enter_practical_test_details(request):
     if request.method == 'POST':
-        form = PracticalInternal(request.POST) 
+        form = PracticalInternalForm(request.POST) 
         print("I am inside if post is true ")
         if form.is_valid():
             print("I am inside forms valid")
             return HttpResponseRedirect('/thanks/')
     else:
-        print("i am inside else")
-        form = PracticalInternal()
+        print("i am inside else enter_practical_test_details")
+        form = PracticalInternalForm()
     print("Add practical marks of a student")
     return render(request,'add_practical_test_details.html',{'form':form})
 

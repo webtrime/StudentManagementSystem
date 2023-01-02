@@ -1,39 +1,39 @@
-
+# Trying out class based models
 from django import forms
+from django.forms import ModelForm
+from django.forms import SelectDateWidget
+from django.contrib.admin.widgets import AdminDateWidget
+from . import models
 
-class StudentForm(forms.Form):
-    unique_id = forms.CharField(label="UniqueId",max_length=50)
-    roll_no = forms.CharField(label='RollNo',max_length=4)
-    firstname = forms.CharField(label='Firstname',max_length=100)
-    lastname = forms.CharField(label='Lastname',max_length=255)
-    gender = forms.CharField(label='gender',max_length=6)
-    email = forms.CharField(label='email',max_length=255)
-    #photo need to create a field for photo upload
-    date_of_birth = forms.CharField(label='date_of_birth', max_length=255)
-    mobile_no = forms.CharField(label='mobile_no',max_length=255)
-    hosteler = forms.CharField(label='hosteler',max_length=255)
-    mother_tongue = forms.CharField(label='mother_tongue',max_length=255)
-    other_languages = forms.CharField(label='other_languages',max_length=255)
-    nationality = forms.CharField(label='nationality',max_length=255)
-    community = forms.CharField(label='community',max_length=255)
-    blood_group = forms.CharField(label='blood_group',max_length=255)
-    educational_qualification = forms.CharField(label='educational_qualification',max_length=255)
-    name_of_school_last_studied = forms.CharField(label='name_of_school_last_studied',max_length=1024)
-    neet_marks = forms.CharField(label='neet_marks',max_length=255)
-    extracurricular_activities = forms.CharField(label='extracurricular_activities',max_length=1024)
-    fathers_name = forms.CharField(label='fathers_name',max_length=255)
-    fathers_occupation = forms.CharField(label='fathers_occupation',max_length=255)
-    fathers_mobile = forms.CharField(label='fathers_mobile',max_length=255)
-    mothers_name = forms.CharField(label='mothers_name',max_length=255)
-    mothers_occupation = forms.CharField(label='mothers_occupation',max_length=255)
-    permanent_address = forms.CharField(label='permanent_address',max_length=1024)
-    pincode = forms.CharField(label='pincode',max_length=255)
-    parents_email = forms.CharField(label='parents_email',max_length=255)
+class StudentForm(ModelForm):
+    class Meta:
+        model = models.Student
+        fields = '__all__'
+        #the * operator unpacks the range now
+        years = [*range(1900,2100,1)]
+        # you may need it here
+        # https://simpleisbetterthancomplex.com/tutorial/2019/01/03/how-to-use-date-picker-with-django.html
+        # https://www.youtube.com/watch?v=1IP7Vkwhb_A
+        # the following post helped me render the calendar widget in my
+        # student_reg page
+        # https://stackoverflow.com/questions/66258610/django-admindatewidget-apprearing-as-textinput/68468821#68468821
+        # It is found in
+        # https://docs.djangoproject.com/en/4.1/ref/forms/widgets/ under
+        # styling-widget-instances
+        widgets = {
+            'date_of_birth' : AdminDateWidget(
+                attrs={'type':'date',}
+            ),
+        }
 
-class PracticalInternal(forms.Form):
-    test_id = forms.CharField(label='test_id',max_length=100)
-    max_marks = forms.CharField(label="max_marks",max_length=100)
-    date_of_conduction = forms.DateField()
+class PracticalInternalForm(ModelForm):
+    class Meta:
+        model = models.PracticalInt
+        fields = '__all__'
+
+    #test_id = forms.CharField(label='test_id',max_length=100)
+    #max_marks = forms.CharField(label="max_marks",max_length=100)
+    #date_of_conduction = forms.DateField()
 
 class AddPracticalMarks(forms.Form):
     unique_id = forms.CharField(label="unique_id",max_length=50)

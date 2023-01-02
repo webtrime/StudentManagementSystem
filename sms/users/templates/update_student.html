@@ -1,5 +1,6 @@
 <h1>Update Student</h1>
-<form action="/users/test/" method = "post">
+<h2>{{student.id}}</h2>
+<form action="/users/update_student_new/{{student.unique_id}}" method = "post">
 	{% csrf_token %}
 	<table>
 	{{ form.as_table }}

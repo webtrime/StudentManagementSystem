@@ -13,3 +13,24 @@ Dec 15 2022:
 - Now inside the "StudentManagementSystem" Directory, i ran the command "django startproject sms". This created a directory "sms" with a file named "mange.py" and a directory "sms"
 - To check if my project worked, I went into the "sms" directory and ran "python manage.py runserver". This created a server at 127.0.0.1:8000. I visited this page and saw that Django was running 
 
+Jan 1, 2023
+
+- Page containing all the students details in a table has been created.
+- From the same page, the viewer can update the record and delete the record
+
+- Now I have learnt that, a model can be defined in the models.py file. This can be used to define ModelForms. ModelForms have a inner class Meta, which have attributes called "Model" - the name of the model that is going to used for forming the form, another attribute called "fields" - the fields that are to be rendered.
+
+- In the views, if a view is being called by a POST method, then all the parameters are send to this view as a "QueryDict"object and can be accessed by calling request.POST
+
+- TODO:
+	- convert the other form objects to ModelForm ones,
+	- create a page with a form  where marks of all students of a particular test could be entered
+		- this page should have zero as default entries
+	- create a page which lists all tests,
+		- this page should have the function such that when a test is clicked, it should take us to the page where the marks of all students of this test should be entered.
+	- create a similar page as that of "users" where all practical marks of all students are supposed to be seen
+		- this page will later go on to contain all the attendances for all students
+		- this page should have functionalities like updating a students mark, attendance etc
+			- here since marks and attendance of a student are from different table, a idea of using form groups should be thought off
+
+

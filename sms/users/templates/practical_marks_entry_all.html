@@ -1,0 +1,30 @@
+<h1> Practical Marks Entry </h1>
+
+<form action="/users/test/" method = "post">
+	{% csrf_token %}
+	<table>
+	{{ test_details_form.as_table }}
+	</table>
+	<h1>This form has to be submitted before proceeding further</h1>
+	<input type="submit" value="Save">
+</form>
+
+<form action="users/test" method = "post">
+    <table border ='2'>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Marks Obtained</th>
+        </tr>
+        {% for x in students %}
+        <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{x.unique_id}}</td>
+        <td> <input type="text" id="marks_obtained_{{x.unique_id}}" name="marks_obtained"></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+	<input type="submit" value="Save">
+</form>
+

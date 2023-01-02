@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.admin.widgets import AdminDateWidget
 
 # Create your models here.
 
@@ -10,7 +11,7 @@ class Student(models.Model):
     gender = models.CharField(max_length=6)
     email = models.CharField(max_length=255)
     #photo need to create a field for photo upload
-    date_of_birth = models.CharField(max_length=255)
+    date_of_birth = models.DateField()
     mobile_no = models.CharField(max_length=255)
     hosteler = models.CharField(max_length=255)
     mother_tongue = models.CharField(max_length=255)
@@ -30,6 +31,7 @@ class Student(models.Model):
     permanent_address = models.CharField(max_length=1024)
     pincode = models.CharField(max_length=255)
     parents_email = models.CharField(max_length=255)
+    
 
 class PracticalInt(models.Model):
     '''

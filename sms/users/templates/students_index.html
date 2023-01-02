@@ -2,6 +2,7 @@
 <table border='2'>
     <tr>
         <th>S.No</th>
+        <th>Data_id</th>
         <th>Student_id</th>
         <th>Firstname</th>
         <th>Lastname</th>
@@ -31,8 +32,9 @@
     </tr>
 	{% for x in students %}
 	<tr>
+        <td>{{forloop.counter}}</td>
         <td>{{x.id}}</td>
-        <td><a href = "/users/update_student/{{x.unique_id}}"> {{x.unique_id}}</a></td>
+        <td><a href = "/users/update_student_new/{{x.unique_id}}"> {{x.unique_id}}</a></td>
 		<td>{{x.firstname}}</td>
 		<td>{{x.lastname}}</td>
 		<td>{{x.gender}}</td>
@@ -57,6 +59,8 @@
 		<td>{{x.permanent_address}}</td>
 		<td>{{x.pincode}}</td>
 		<td>{{x.parents_email}}</td>
+
+        <td><a href = "/users/delete/{{x.unique_id}}">DELETE</a></td>
 	</tr>
 	{% endfor %}
 </table>

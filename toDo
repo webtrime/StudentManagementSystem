@@ -60,9 +60,9 @@ As of now I have decided to have a single database with the following tables
 Steps:
 1. create a model for practical internal student with the necessary columns
 2. fill it up with dummy data
+3. view it in a view with a url home/student-id/
 
-3. A practical internal table
-	- The columns of are going to be
+3. A practical internal table	- The columns of are going to be
 		- The unique test id
 		- max marks
 		- date of conduction of test
