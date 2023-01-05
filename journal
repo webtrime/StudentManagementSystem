@@ -33,4 +33,9 @@ Jan 1, 2023
 		- this page should have functionalities like updating a students mark, attendance etc
 			- here since marks and attendance of a student are from different table, a idea of using form groups should be thought off
 
+Jan 6 2023:
+Cleaned up my project. Now the user app folder contains 2 view files. ChatGPT is simply awesome. Only thing you will have to import the correct view file.
+To do:
+	- To create a form where i can enter all student marks via formset
+
 

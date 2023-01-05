@@ -1,5 +1,5 @@
 from django.urls import include,path
-from . import views
+from . import views, mark_view
 
 urlpatterns = [
     # paths to view, add, update and delete students
@@ -10,17 +10,11 @@ urlpatterns = [
     path('update_student_new/<slug:student_id>',views.update_student_new,name='update_student_new'),
     path('delete/<slug:student_id>',views.delete_student,name='delete_student'),
 
-    path('enter_all_student_prac_marks/',views.enter_prac_marks,name = 'enter_prac_marks'),
+    path('enter_test_details/',mark_view.enter_test_details, name = 'enter_test_details'),
+    path('add_test_details/', mark_view.add_test_details, name = 'add_test_details'),
+    path('show_tests/',mark_view.show_tests, name = 'show_tests'),
+    path('update_test_details/<int:test_id>',mark_view.update_test_details, name = 'update_test_details'),
+    path('delete_test_details/<int:test_id>', mark_view.delete_test_details, name = 'delete_test_details')
+
     
-    path('students_marks_practical_index/',views.test_student_practical_index,name='students_marks_practical_index'),
-    path('enter_student_mark_practical/',views.enter_student_mark_practical,name='enter_student_mark_practical'),
-    path('add_student_mark_practical/',views.add_student_mark_practical,name='add_student_mark_practical'),
-
-    path('enter_practical_test_details/',views.enter_practical_test_details,name='enter_practical_test_details'),
-    path('add_practical_test_details/',views.add_practical_test_details,name='add_practical_test_details'),
-
-    path('add_user/',views.add_user,name="add_user"),
-    path('update_user/',views.update_user,name="update_user"),
-    path("accounts/",include("django.contrib.auth.urls")),
-    path("dashboard/", views.dashboard, name="dashboard")
 ]

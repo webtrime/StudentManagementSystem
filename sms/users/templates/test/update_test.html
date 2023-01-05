@@ -1,0 +1,9 @@
+<h1>Update Test</h1>
+<form action="/users/update_test_details/{{test.test_id}}" method = "post">
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<h1>Update From</h1>
+	<input type="submit" value="Update">
+</form>

@@ -1,0 +1,26 @@
+<h1> Test </h1>
+<table border='2'>
+    <tr>
+        <th>S.No</th>
+        <th>Test id</th>
+        <th>Test type</th>
+        <th>Max Marks</th>
+        <th>Date of conduction</th>
+
+    </tr>
+	{% for x in tests %}
+	<tr>
+        <td>{{forloop.counter}}</td>
+        <td><a href = "/users/update_test_details/{{x.test_id}}">{{x.test_id}}</a></td>
+        <td>{{x.test_type}}</a></td>
+		<td>{{x.max_marks}}</td>
+		<td>{{x.date_of_conduction}}</td>
+
+        <td><a href = "/users/delete_test_details/{{x.test_id}}">DELETE</a></td>
+	</tr>
+	{% endfor %}
+</table>
+
+
+
+

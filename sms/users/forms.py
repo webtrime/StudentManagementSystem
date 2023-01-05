@@ -10,7 +10,6 @@ class StudentForm(ModelForm):
         model = models.Student
         fields = '__all__'
         #the * operator unpacks the range now
-        years = [*range(1900,2100,1)]
         # you may need it here
         # https://simpleisbetterthancomplex.com/tutorial/2019/01/03/how-to-use-date-picker-with-django.html
         # https://www.youtube.com/watch?v=1IP7Vkwhb_A
@@ -26,18 +25,22 @@ class StudentForm(ModelForm):
             ),
         }
 
-class PracticalInternalForm(ModelForm):
-    class Meta:
-        model = models.PracticalInt
-        fields = '__all__'
-
-    #test_id = forms.CharField(label='test_id',max_length=100)
-    #max_marks = forms.CharField(label="max_marks",max_length=100)
-    #date_of_conduction = forms.DateField()
-
-class AddPracticalMarks(forms.Form):
-    unique_id = forms.CharField(label="unique_id",max_length=50)
-    unique_test_id = forms.CharField(label="unique_test_id",max_length=50)
-    marks = forms.CharField(label="mark_obtained",max_length=100)
+class TestTypeForm(ModelForm):
+    CHOICES = [
+        ('theory', 'Theory'),
+        ('practical','Practical'),
+        ('viva','Viva')
+              ]
+    test_type = forms.ChoiceField(choices = CHOICES) 
     
+    class Meta:
+        model = models.TestType
+        fields = '__all__'
+        widgets = {
+            'date_of_conduction' : AdminDateWidget(
+                attrs={'type':'date',}
+            ),
+        }
+
+
 

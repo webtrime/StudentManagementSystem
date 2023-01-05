@@ -31,22 +31,31 @@ class Student(models.Model):
     permanent_address = models.CharField(max_length=1024)
     pincode = models.CharField(max_length=255)
     parents_email = models.CharField(max_length=255)
-    
 
-class PracticalInt(models.Model):
+class TestType(models.Model):
     '''
-    test_id = 20221111, date in the reverse will be test id
-    max_marks = 20 , max_marks for the test
-    date_of_conduction = 2022-11-11, date on which the date is conducted
+    A base class for the tests
+    test_id = a unique id that represents the test
+    test_type = the type of test , theory, practical, viva
+    date_of_conduction = some date on which the test was conducted
+    max_marks = the max marks that the student can score in that test
     '''
     test_id = models.CharField(max_length = 50, unique = True)
-    max_marks = models.IntegerField()
+    test_type = models.CharField(max_length = 50)
+    max_marks = models.PositiveIntegerField()
     date_of_conduction = models.DateField()
 
-class PracticalInternalStudent(models.Model):
-    s = models.ForeignKey(Student,on_delete=models.CASCADE,related_name = "student")
-    unique_test = models.ForeignKey(PracticalInt,on_delete=models.CASCADE,related_name = "practical_test")
-    marks = models.IntegerField()
+class Tests(models.Model):
+    '''
+    student_id = a foreign key that references to the student Table
+    test_type = a foreign key that references to the TestType Table
+    marks_obtained = marks obtained by the student
+    '''
+    student_id = models.ForeignKey(Student,on_delete=models.CASCADE,related_name = "student")
+    test_type = models.ForeignKey(TestType,on_delete=models.CASCADE,related_name = "type_of_test")
+    marks_obtained = models.IntegerField()
+
+    
 
 
 
