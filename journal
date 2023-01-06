@@ -39,3 +39,9 @@ To do:
 	- To create a form where i can enter all student marks via formset
 
 
+Jan 7 2023 00:01
+I have created a form from where i can enter all student marks, the form is giving me a post which is processable, ie i can iterate thorugh two list simultaneously to find which student secured which marks. After all django desingerrs would have thought about it.
+
+	_ i need to write code to loop throught the list and save it to the database
+
+

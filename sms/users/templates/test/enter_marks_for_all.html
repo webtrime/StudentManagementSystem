@@ -1,0 +1,26 @@
+<h1> Enter marks for all {{test_details.test_type}} <h1>
+<form action="/users/save_marks/" method="post">
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+            <th>S.No</th>
+            <th>Roll.No</th>
+            <th>Name</th>
+            <th>Marks Obtained</th>
+        </tr>
+        {% for x in students %}
+        <tr>
+            <th>{{ forloop.counter }}</th>
+            <th>{{ x.roll_no }}</th>
+            <th>{{ x.firstname }}</th>
+            <th><input type="number" name="mark"></th>
+            <input type="hidden" name="student_id" value="{{ x.unique_id }}">
+            <input type="hidden" name="test_type" value="{{ test_details.test_type }}">
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+<input type="submit" value="Save Marks">
+</form>

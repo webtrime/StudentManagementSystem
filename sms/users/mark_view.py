@@ -56,7 +56,6 @@ def add_test_details(request):
     return HttpResponseRedirect(reverse("enter_test_details"))
 
 def update_test_details(request,test_id):
-
     '''
     Usage: To update a test detail
     '''
@@ -88,4 +87,30 @@ def delete_test_details(request,test_id):
     test = TestType.objects.get(test_id = test_id)
     test.delete()
     return HttpResponseRedirect(reverse('show_tests'))
+
+def enter_marks_for_all(request,test_id):
+    #get the details of the test "test_id"
+
+    test_details = TestType.objects.get(test_id = test_id)
+    students = Student.objects.all()
+
+    template = loader.get_template('./test/enter_marks_for_all.html')
+    print("enter_marks_for_all")
+    context = {
+        'test_details' : test_details,
+        'students' : students,
+    }
+
+    return HttpResponse(template.render(context,request))
+
+def save_marks(request):
+    print(request.POST)
+    context = {
+
+    }
+
+    return HttpResponseRedirect(reverse('show_tests'))
+
+    pass
+
 
