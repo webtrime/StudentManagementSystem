@@ -1,4 +1,4 @@
-<h1> Enter marks for all {{test_details.test_type}} <h1>
+<h1> Enter or Update marks for all {{test_details.test_type}} <h1>
 <form action="/users/save_marks/" method="post">
     {% csrf_token %}
     <table border="2">
@@ -8,12 +8,12 @@
             <th>Name</th>
             <th>Marks Obtained</th>
         </tr>
-        {% for x in students %}
+        {% for x, y in combined_lists %}
         <tr>
-            <th>{{ forloop.counter }}</th>
-            <th>{{ x.roll_no }}</th>
-            <th>{{ x.firstname }}</th>
-            <th><input type="number" name="mark"></th>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ x.roll_no }}</td>
+            <td>{{ x.firstname }}</td>
+            <td><input type ="number" name='mark' value ="{{ y.marks_obtained }}"></td>
             <input type="hidden" name="student_id" value="{{ x.unique_id }}">
             <input type="hidden" name="test_id" value="{{ test_details.test_id }}">
         </tr>

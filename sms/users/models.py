@@ -45,7 +45,7 @@ class TestType(models.Model):
     max_marks = models.PositiveIntegerField()
     date_of_conduction = models.DateField()
 
-class Tests(models.Model):
+class Test(models.Model):
     '''
     student_id = a foreign key that references to the student Table
     test_type = a foreign key that references to the TestType Table

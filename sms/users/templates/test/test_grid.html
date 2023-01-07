@@ -1,4 +1,6 @@
-<h1> Test </h1>
+<h1> Test Grid </h1>
+{% csrf_token %}
+<a href = "/users/enter_test_details/">Add Test
 <table border='2'>
     <tr>
         <th>S.No</th>
@@ -15,7 +17,7 @@
         <td>{{x.test_type}}</a></td>
 		<td>{{x.max_marks}}</td>
 		<td>{{x.date_of_conduction}}</td>
-        <td><a href = "/users/enter_marks_for_all/{{x.test_id}}">Enter Marks</button></td>
+        <td><a href = "/users/enter_marks_for_all_new/{{x.test_id}}">Enter Marks</td>
 
         <td><a href = "/users/delete_test_details/{{x.test_id}}">DELETE</a></td>
 	</tr>

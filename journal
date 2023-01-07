@@ -44,4 +44,9 @@ I have created a form from where i can enter all student marks, the form is givi
 
 	_ i need to write code to loop throught the list and save it to the database
 
+Jan 8 2023 00:41
+The view function for updating a student mark for a particular test has been created.
+	- I need to add implement a similar page for attendance
+	- I need to create login pages now
+
 

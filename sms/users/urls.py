@@ -15,7 +15,8 @@ urlpatterns = [
     path('show_tests/',mark_view.show_tests, name = 'show_tests'),
     path('update_test_details/<int:test_id>/', mark_view.update_test_details, name = 'update_test_details'),
     path('delete_test_details/<int:test_id>/', mark_view.delete_test_details, name = 'delete_test_details'),
-    path('enter_marks_for_all/<int:test_id>/', mark_view.enter_marks_for_all, name = 'enter_marks_for_all'),
+    #path('enter_marks_for_all/<int:test_id>/', mark_view.enter_marks_for_all, name = 'enter_marks_for_all'),
+    path('enter_marks_for_all_new/<int:test_id>/', mark_view.enter_marks_for_all_new, name = 'enter_marks_for_all_new'),
     path('save_marks/', mark_view.save_marks, name = 'save_marks')
 
     
