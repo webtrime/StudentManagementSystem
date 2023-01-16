@@ -5,6 +5,12 @@ from django.forms import SelectDateWidget
 from django.contrib.admin.widgets import AdminDateWidget
 from . import models
 
+class BatchForm(ModelForm):
+    class Meta:
+        model = models.Batch
+        fields = '__all__'
+
+
 class StudentForm(ModelForm):
     class Meta:
         model = models.Student
@@ -24,6 +30,24 @@ class StudentForm(ModelForm):
                 attrs={'type':'date',}
             ),
         }
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = kwargs.get('instance')
+        print("instance.batch_id = ",instance.batch_id)
+        if instance and instance.batch_id != None:
+            print("i am inside instance")
+            print(models.Batch.objects.get(id=instance.batch_id).batch_name)
+            self.fields['batch'].initial = models.Batch.objects.get(
+                id = instance.batch_id
+            ).batch_name
+
+        else:
+            batch = forms.ModelChoiceField(
+                                    queryset=models.Batch.objects.all(),
+                                    to_field_name='batch_name',
+                                )
 
 class TestTypeForm(ModelForm):
     CHOICES = [

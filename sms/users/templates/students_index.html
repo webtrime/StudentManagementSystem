@@ -4,6 +4,8 @@
         <th>S.No</th>
         <th>Data_id</th>
         <th>Student_id</th>
+        <td>Year_of_admission</td>
+        <td>Batch</td>
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Gender</th>
@@ -35,6 +37,14 @@
         <td>{{forloop.counter}}</td>
         <td>{{x.id}}</td>
         <td><a href = "/users/update_student_new/{{x.unique_id}}"> {{x.unique_id}}</a></td>
+        <td>{{x.year_of_admission}}</td>
+        {% with x_batch=x.batch %}
+            {% if x_batch %}
+                <td>{{x_batch.batch_name}}</td>
+            {% else %}
+                <td>Not Assigned</td>
+            {% endif %}
+        {% endwith %}
 		<td>{{x.firstname}}</td>
 		<td>{{x.lastname}}</td>
 		<td>{{x.gender}}</td>

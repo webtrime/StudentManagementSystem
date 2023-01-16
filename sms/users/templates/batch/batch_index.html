@@ -1,0 +1,21 @@
+<h1>Batches</h1>
+
+<a href = "/users/add_batch/">Add Batch</a>
+<br>
+
+<table border='2'>
+    <tr>
+        <th>S.No</th>
+        <th>Batch</th>
+    </tr>
+
+    {% for x in my_batches %}
+    <tr>
+        <td><a href = "/users/update_batch/{{x.id}}"> {{x.id}}</a></td>
+        <td>{{x.batch_name}}</td>
+        <td><a href = "/users/delete_batch/{{x.id}}">DELETE</a></td>
+    </tr>
+    {% endfor %}
+
+
+</table>

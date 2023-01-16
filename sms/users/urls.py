@@ -1,5 +1,5 @@
 from django.urls import include,path
-from . import views, mark_view
+from . import views, mark_view, batch_view
 
 urlpatterns = [
     # paths to view, add, update and delete students
@@ -9,6 +9,12 @@ urlpatterns = [
     path('add_student/',views.add_student,name='add_student'),
     path('update_student_new/<slug:student_id>/',views.update_student_new,name='update_student_new'),
     path('delete/<slug:student_id>/',views.delete_student,name='delete_student'),
+
+    # paths to view, add, update and delete batches
+    path('batch_grid/',batch_view.batch_index, name = 'batch_grid'),
+    path('add_batch/', batch_view.add_batch, name= 'add_batch'),
+    path('update_batch/<slug:batch_id>/', batch_view.update_batch, name='update_batch'),
+    path('delete_batch/<slug:batch_id>/', batch_view.delete_batch, name='delete_batch'),
 
     path('enter_test_details/',mark_view.enter_test_details, name = 'enter_test_details'),
     path('add_test_details/', mark_view.add_test_details, name = 'add_test_details'),

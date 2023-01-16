@@ -1,0 +1,9 @@
+<h1>Batches</h1>
+<form action="/users/add_batch/" method = "post">
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Submit">
+</form>
+

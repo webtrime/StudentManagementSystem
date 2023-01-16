@@ -1,0 +1,10 @@
+<h1>Update Batch</h1>
+<h2>{{batch.id}}</h2>
+<form action="/users/update_batch/{{batch.id}}/" method = "post">
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<h1>Update From</h1>
+	<input type="submit" value="Update">
+</form>

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from .models import Student
+from .models import Student,Batch
 from .forms import StudentForm 
 
 def test_index(request):
@@ -73,7 +73,8 @@ def add_user(request):
     return HttpResponseRedirect(reverse("student_reg"))
 
 def test_student_index(request):
-    students = Student.objects.all().values()
+    #students = Student.objects.all().values()
+    students = Student.objects.all()
     template = loader.get_template('students_index.html')
     context = {
         'students' : students,
@@ -197,6 +198,7 @@ def update_student_new(request,student_id):
     '''
     student = Student.objects.get(unique_id = student_id)
 
+
     if (request.method == 'POST'):
 
         form = StudentForm(request.POST, instance = student)
@@ -243,19 +245,10 @@ def delete_student(request,student_id):
     student.delete()
     return HttpResponseRedirect(reverse('student_grid'))
 
-######Start of Mark entry views
 
 
 
 
-
-    practical_test_details = PracticalInt(
-        test_id = test_id,
-        max_marks = max_marks,
-        date_of_conduction = date_of_conduction,
-    )
-    practical_test_details.save()
-    return HttpResponseRedirect(reverse('enter_practical_test_details'))
 
 
 

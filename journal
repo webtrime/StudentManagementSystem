@@ -49,4 +49,11 @@ The view function for updating a student mark for a particular test has been cre
 	- I need to add implement a similar page for attendance
 	- I need to create login pages now
 
+Jan 17 1:02
+Form from where batch names could be created have been added.
+The year of admission and batch name fields have been added to the student model
 
+Now i should be able to create forms where attendance can be marked for theroy, practical and sdl should be done.
+
+The attendance page should take the following inputs before displaying the form.
+Date, type of class, if theory all names should appear, if practical, then we should be able to choose the batches..

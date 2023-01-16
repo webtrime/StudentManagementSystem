@@ -3,9 +3,24 @@ from django.contrib.admin.widgets import AdminDateWidget
 
 # Create your models here.
 
+class Batch(models.Model):
+    '''
+    This model shall hold the batch names, namely 'A', 'B'
+    or 'C'
+    '''
+    batch_name = models.CharField(max_length=4, unique=True)
+
+    def __str__(self):
+        return self.batch_name
+
 class Student(models.Model):
-    unique_id = models.CharField(max_length = 100,unique = True)
-    roll_no = models.CharField(max_length = 4, unique = True)
+    #editable by Staff
+    unique_id = models.CharField(max_length = 100,unique=True)
+    roll_no = models.CharField(max_length = 4,unique=True, blank=True, null=True)
+    # the batch to which the candidate belongs eg. Vivin belongs to 2022 batch
+    year_of_admission = models.CharField(max_length = 4, blank=True, null=True)
+    batch = models.ForeignKey(Batch, on_delete=models.SET_NULL, null=True)
+    #editable by student
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
     gender = models.CharField(max_length=6)
@@ -54,6 +69,8 @@ class Test(models.Model):
     student_id = models.ForeignKey(Student,on_delete=models.CASCADE,related_name = "student")
     test_type = models.ForeignKey(TestType,on_delete=models.CASCADE,related_name = "type_of_test")
     marks_obtained = models.IntegerField()
+
+    
 
     
 
