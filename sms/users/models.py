@@ -11,7 +11,13 @@ class Batch(models.Model):
     batch_name = models.CharField(max_length=4, unique=True)
 
     def __str__(self):
-        return self.batch_name
+        try:
+            print("hai i am inside try")
+            return self.batch_name
+        except TypeError:
+            print("hei i am inside except")
+            return "None"
+            
 
 class Student(models.Model):
     #editable by Staff
@@ -19,7 +25,7 @@ class Student(models.Model):
     roll_no = models.CharField(max_length = 4,unique=True, blank=True, null=True)
     # the batch to which the candidate belongs eg. Vivin belongs to 2022 batch
     year_of_admission = models.CharField(max_length = 4, blank=True, null=True)
-    batch = models.ForeignKey(Batch, on_delete=models.SET_NULL, null=True)
+    batch = models.ForeignKey(Batch,on_delete=models.SET_NULL,blank=True,null=True)
     #editable by student
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
@@ -69,6 +75,27 @@ class Test(models.Model):
     student_id = models.ForeignKey(Student,on_delete=models.CASCADE,related_name = "student")
     test_type = models.ForeignKey(TestType,on_delete=models.CASCADE,related_name = "type_of_test")
     marks_obtained = models.IntegerField()
+
+
+class AttendanceType(models.Model):
+    '''
+    This will store the following details
+    id: Automatically created id for each row
+    date: date for which attendance is being taken
+    type_of_class: type of class, namely theory, practical, sdl, aetcom or ece 
+    '''
+    batch_year = models.CharField(max_length=4)
+
+    date_of_attendance = models.DateField()
+    type_of_class = models.CharField(max_length= 50, null=False, blank=False)
+    duration = models.IntegerField()
+    # the column batch will take one of the values of batch, if the class type
+    # is theory, aetcom or ece the batch will be null
+    batch = models.ForeignKey(Batch, on_delete=models.SET_NULL, null=True, blank=True)
+    
+
+    
+
 
     
 

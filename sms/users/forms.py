@@ -12,6 +12,13 @@ class BatchForm(ModelForm):
 
 
 class StudentForm(ModelForm):
+
+    batch = forms.ModelChoiceField(
+                            queryset=models.Batch.objects.all(),
+                            required=False,
+                            blank=True,
+                            empty_label="Select a Batch"
+                        )
     class Meta:
         model = models.Student
         fields = '__all__'
@@ -35,19 +42,21 @@ class StudentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         instance = kwargs.get('instance')
-        print("instance.batch_id = ",instance.batch_id)
-        if instance and instance.batch_id != None:
+        if instance and instance.batch != None:
+            print("instance.batch_id = ",instance.batch_id)
             print("i am inside instance")
-            print(models.Batch.objects.get(id=instance.batch_id).batch_name)
+            #print(models.Batch.objects.get(id=instance.batch_id).batch_name)
             self.fields['batch'].initial = models.Batch.objects.get(
-                id = instance.batch_id
+                id = instance.batch.id
             ).batch_name
 
         else:
-            batch = forms.ModelChoiceField(
-                                    queryset=models.Batch.objects.all(),
-                                    to_field_name='batch_name',
-                                )
+            print("i am inside else of studentform")
+            #batch = forms.ModelChoiceField(
+            #                        queryset=models.Batch.objects.all(),
+            #                        blank=True,
+            #                        empty_label="Select a Batch"
+            #                    )
 
 class TestTypeForm(ModelForm):
     CHOICES = [
@@ -67,4 +76,45 @@ class TestTypeForm(ModelForm):
         }
 
 
+class AttendanceTypeForm(ModelForm):
+    batch = forms.ModelChoiceField(
+        queryset=models.Batch.objects.all(),
+        empty_label='Select a Batch',
+        required=False,
+        blank=True
+    )
 
+    CHOICES = [
+        ('theory', 'Theory'),
+        ('practical','Practical'),
+        ('sdl','SDL'),
+        ('ece','ECE'),
+        ('aetcom', 'AETCOM'),
+              ]
+    type_of_class = forms.ChoiceField(choices = CHOICES) 
+    
+    class Meta:
+        model = models.AttendanceType
+        fields = '__all__'
+        widgets = {
+            'date_of_attendance' : AdminDateWidget(
+                attrs={'type':'date',}
+            ),
+        }
+    def clean(self):
+        cleaned_data = super().clean()
+        print(" i am inside clean")
+        attendance_type = cleaned_data.get('type_of_class')
+        batch = cleaned_data.get('batch')
+
+        class_types_attended_in_batches = [
+            'practical',
+            'sdl'
+        ] 
+        print("attendance_type is in list",attendance_type in class_types_attended_in_batches )
+
+        if (attendance_type in class_types_attended_in_batches) and not batch:
+            self.add_error('batch','Batch must be selected for this class type')
+
+
+        

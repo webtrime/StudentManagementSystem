@@ -1,0 +1,9 @@
+<h1>Enter Attendance Details</h1>
+
+<form action="/users/enter_attendance_details/" method = "post">
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Save Attendance Details">
+</form>

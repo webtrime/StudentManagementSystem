@@ -1,0 +1,23 @@
+<h1>Theory Dashboard</h1>
+<table border="2">
+    <th>S.No</th>
+    <th>Unique ID</th>
+    <th>Firstname</th>
+
+    {% for i in theory_tests %}
+    
+    <th>IA-{{forloop.counter}}</th>
+    {% endfor %}
+    {% for i,value in marks_dict.items %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.unique_id}}</td>
+        <td>{{i.firstname}}</td>
+        {% for j in value %}
+        <td>{{j}}</td>
+        {% endfor%}
+    </tr>
+    {% endfor%}
+    
+    
+</table>

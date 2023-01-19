@@ -57,3 +57,14 @@ Now i should be able to create forms where attendance can be marked for theroy, 
 
 The attendance page should take the following inputs before displaying the form.
 Date, type of class, if theory all names should appear, if practical, then we should be able to choose the batches..
+
+Jan 19 2023,
+Now the dashboard for displaying all the theory marks of all students is implemented.
+- I have learned how to chain filters that to when tables are related with foreign keys
+- I need to draw a diagram for this
+
+Is this a feature or something to be rectified?
+	A testType exists, after this testType has been created, two new students have been created.
+	So when i click "enter marks" from the testgrid page, the resulting page shows only the existing students (IT DOE S NOT SHOW THE NEWLY CREATED STUDENTS)
+
+

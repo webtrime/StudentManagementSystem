@@ -180,11 +180,22 @@ def add_student(request):
     student_data.pop('csrfmiddlewaretoken')
     # convert it to a dictionary to create a Model object
     student_data_dict = student_data.dict()
-    print(student_data_dict)
+    print("student_data_batch",student_data_dict['batch'])
+
+    if student_data_dict['batch'] == '':
+        print(" iam inside if of batch None")
+        null_batch = None 
+        student_data_dict['batch'] = null_batch 
+        try:
+            print(student_data_dict['batch'])
+        except:
+            print("I am inside except")
+        student = Student(**student_data_dict)
     
     # ** are required to unpack the dictionary
-
-    student = Student(**student_data_dict)
+    else:
+        student = Student(**student_data_dict)
+        #print("batch_id = ",student.batch)
 
     print("saving to student database")
     student.save()

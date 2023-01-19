@@ -1,0 +1,26 @@
+<h1>Attendance grid</h1>
+
+<table border="2">
+    <tr>
+        <th>S.No</th>
+        <th>Batch Year</th>
+        <th>Date of Attendance</th>
+        <th>Type of Class</th>
+        <th>Duration</th>
+        <th>Batch</th>
+    </tr>
+
+    {% for x in attendance %}
+    <tr>
+
+        <td><a href = "/users/update_attendance_details/{{x.id}}"> {{x.id}}</a></td>
+        <td>{{x.batch_year}}</td>
+        <td>{{x.date_of_attendance}}</td>
+        <td>{{x.type_of_class}}</td>
+        <td>{{x.duration}}</td>
+        <td>{{x.batch}}</td>
+        <td><a href = "/users/mark_attendance/">MARK ATTENDANCE</a></td>
+        <td><a href = "/users/delete_attendance_details/{{x.id}}">DELETE</a></td>
+    </tr>
+    {% endfor %}
+</table>
